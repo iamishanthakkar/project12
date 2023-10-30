@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+    <div ng-controller="myCtrl" class="container">
+
+        <h1>Add Record</h1>
+        <form>
+            <input type="hidden" ng-model="user._id">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">UserName</label>
+                <input type="text" class="form-control" ng-model="user.Name" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Age</label>
+                <input type="text" class="form-control" ng-model="user.Age" aria-describedby="emailHelp">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">course</label>
+                <input type="text" class="form-control" ng-model="user.Course" aria-describedby="emailHelp">
+            </div>
+            <button type="button" ng-click=addData() ng-show="addBtn" class="btn btn-outline-primary">Add</button>
+            <button type="button" ng-click=updateData() ng-show="updBtn" class="btn btn-outline-primary">Update</button>
+        </form>
+
+        <select ng-model="selectedName" ng-options="key as key for (key, value) in orderss[0]"></select>
+
+        <h1>All Datas</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#Id</th>
+                    <th scope="col" ng-click=sortt()>Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="elem in allUsers | orderBy:order | orderBy: selectedName=='asc'?'name':'-name' ">
+                    <th scope="row">{{elem._id}}</th>
+                    <td>{{elem.Name}}</td>
+                    <td>{{elem.Age}}</td>
+                    <td>{{elem.Course}}</td>
+                    <td><button type="button" ng-click=delete(this.elem._id) class="btn btn-danger">Del</button></td>
+                    <td><button type="button" ng-click=edit(this.elem) class="btn btn-success">Edit</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="./ang.js"></script>
+    <script src="./ctrl.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
